@@ -12,45 +12,34 @@ El repositorio se compone de dos proyectos independientes para STM32CubeIDE corr
 
 ```
 ├── audystreaming/                              # Proyecto 1: Audio Streaming USB y Efecto DSP
-│   └── Core/
-│       ├── Inc/
-│       │   ├── hd44780.h              # Driver de pantalla LCD
-│       │   ├── main.h
-│       │   ├── stm32l4xx_hal_conf.h
-│       │   ├── stm32l4xx_it.h
-│       │   └── usbd_audio_if.h
-│       └── Src/
-│           ├── hd44780.c              # Rutinas de control LCD
-│           ├── main.c                 # Rutinas ADC, LCD y reconstrucción DAC con TIM7
-│           ├── stm32l4xx_hal_msp.c
-│           ├── stm32l4xx_it.c         # Manejadores de interrupción
-│           ├── syscalls.c
-│           ├── sysmem.c
-│           ├── system_stm32l4xx.c
-│           └── usbd_audio_if.c        # Tarea de volcado USB a buffer circular
+│   ├── Core/
+│   │   ├── Inc/                       # Cabeceras (hd44780.h, main.h, etc.)
+│   │   └── Src/
+│   │       ├── hd44780.c              # Rutinas de control de la pantalla LCD
+│   │       ├── main.c                 # Rutinas ADC, LCD y reconstrucción DAC con TIM7
+│   │       └── stm32l4xx_it.c         # Manejadores de interrupción
+│   └── USB_DEVICE/
+│       ├── App/
+│       │   ├── usb_device.c/.h        # Inicialización del core USB
+│       │   ├── usbd_audio_if.c/.h     # Interfaz de la clase Audio y volcado a buffer
+│       │   └── usbd_desc.c/.h         # Descriptores de dispositivo USB
+│       └── Target/
+│           └── usbd_conf.c/.h         # Configuración de bajo nivel del hardware USB
+│
 └── intysint/                         # Proyecto 2: Instrumento y Sintetizador USB MIDI
-    └── Core/
-        ├── Inc/
-        │   ├── LSM6DSL.h              # Interface del sensor de acelerómetro/giroscopio
-        │   ├── main.h
-        │   ├── stm32l4xx_hal_conf.h
-        │   ├── stm32l4xx_it.h
-        │   ├── usb_device.h
-        │   ├── usbd_conf.h
-        │   ├── usbd_desc.h
-        │   └── usbd_midi.h            # Interfaz de la clase MIDI de terceros
-        └── Src/
-            ├── LSM6DSL.c              # Lectura del sensor de impacto
-            ├── main.c                 # Lógica de síntesis PWM y comandos Note ON/OFF
-            ├── stm32l4xx_hal_msp.c
-            ├── stm32l4xx_it.c
-            ├── syscalls.c
-            ├── sysmem.c
-            ├── system_stm32l4xx.c
-            ├── usb_device.c           # Inicialización parcheada y registro del Stack
-            ├── usbd_conf.c
-            ├── usbd_desc.c
-            └── usbd_midi.c            # Drivers del dispositivo de clase MIDI
+    ├── Core/
+    │   ├── Inc/                       # Cabeceras (LSM6DSL.h, main.h, etc.)
+    │   └── Src/
+    │       ├── LSM6DSL.c              # Driver I2C para lectura del sensor inercial
+    │       ├── main.c                 # Lógica de síntesis PWM y comandos Note ON/OFF
+    │       └── stm32l4xx_it.c         # Manejadores de interrupción
+    └── USB_DEVICE/
+        ├── App/
+        │   ├── usb_device.c/.h        # Inicialización del core USB
+        │   ├── usbd_custom_hid_if.c/.h # Interfaz Custom HID adaptada para emular MIDI
+        │   └── usbd_desc.c/.h         # Descriptores de dispositivo modificados
+        └── Target/
+            └── usbd_conf.c/.h         # Configuración de bajo nivel del hardware USB
 ```
 
 ---
