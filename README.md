@@ -57,7 +57,7 @@ El repositorio se compone de dos proyectos independientes para STM32CubeIDE corr
 
 ## Modos de Operación y Periféricos
 
-### 1\. Altavoz USB PCM con Efecto Delay (`lab7`)
+### 1\. Altavoz USB PCM con Efecto Delay (`audystreaming`)
 
 El microcontrolador se enumera como un dispositivo de salida estándar de la clase de **Audio Streaming**, recibiendo flujos PCM síncronos desde el host (16-bits a 24 kHz) y reproduciéndolos analógicamente.
 
@@ -65,7 +65,7 @@ El microcontrolador se enumera como un dispositivo de salida estándar de la cla
 * **Procesamiento de Audio en Vivo (DSP):** La señal de entrada se promedia matemáticamente con un vector histórico dentro del buffer circular para producir un efecto de eco (*Delay*).  
 * **Control en Segundo Plano (ADC):** Un bucle de baja prioridad captura el voltaje de la red resistiva de la botonera en la LCD Shield mediante el **ADC1**, ajustando en tiempo real las variables de ganancia y profundidad del retardo.
 
-### 2\. Instrumento y Sintetizador MIDI (`lab7fase3`)
+### 2\. Instrumento y Sintetizador MIDI (`intysint`)
 
 Debido a la ausencia de soporte nativo en el configurador HAL para **MidiStreaming**, la pila de ST fue emulada inicialmente como Custom HID y los descriptores parcheados e inyectados manualmente en `usb_device.c` y `usbd_conf.c` para acoplar la librería `usbd_midi.c`.
 
